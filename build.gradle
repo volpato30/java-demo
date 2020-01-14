@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'maven'
 }
 
 repositories {
@@ -15,15 +16,8 @@ dependencies {
     implementation 'org.pytorch:pytorch_java_only:1.4.0-SNAPSHOT'
 }
 
-def LIBTORCH_HOME = System.getenv('LIBTORCH_HOME')
-if (!LIBTORCH_HOME) {
-  throw new RuntimeException('LIBTORCH_HOME not present in environment.');
-}
-if (!file(LIBTORCH_HOME).isDirectory()) {
-  throw new RuntimeException('LIBTORCH_HOME does not refer to a directory.');
-}
 
 application {
     mainClassName = 'demo.App'
-    applicationDefaultJvmArgs = ["-Djava.library.path=$LIBTORCH_HOME/lib"]
+    applicationDefaultJvmArgs = ["-Djava.library.path=/home/rui/packages/libtorch_nightly/lib"]
 }
